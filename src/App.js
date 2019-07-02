@@ -55,6 +55,10 @@ const UpdateComponent = ({ setSolution }) => {
       label: number.toString()
     });
   };
+  const handleClear = () => {
+    setNumbers([]);
+    setSolution(0);
+  };
 
   return (
     <div className="calc">
@@ -74,7 +78,7 @@ const UpdateComponent = ({ setSolution }) => {
         <button onClick={handleSubtract}>-</button>
       </div>
       <div className="computation">
-        <button onClick={() => setNumbers([])}>clear</button>
+        <button onClick={handleClear}>clear</button>
         <button onClick={handleSolve}>do math</button>
       </div>
     </div>
