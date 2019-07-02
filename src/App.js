@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { initializeReactGA } from "./Auth";
 import ReactGA from "react-ga";
 import "./App.scss";
 
