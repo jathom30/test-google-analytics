@@ -33,8 +33,12 @@ const UpdateComponent = ({ setSolution }) => {
   };
   const handleSolve = () => {
     const secondNumber = parseInt(numbers.join(""));
-    if (operator === "add") setSolution(firstNumber + secondNumber);
-    if (operator === "subtract") setSolution(firstNumber - secondNumber);
+    if (operator === "add") {
+      setSolution(firstNumber + secondNumber);
+    }
+    if (operator === "subtract") {
+      setSolution(firstNumber - secondNumber);
+    }
     ReactGA.event({
       category: "button press",
       action: "solution",
@@ -42,26 +46,37 @@ const UpdateComponent = ({ setSolution }) => {
     });
   };
 
+  const handleNumber = number => {
+    const numArr = [...numbers, number];
+    setNumbers(numArr);
+    ReactGA.event({
+      category: "number press",
+      action: "number",
+      label: number.toString()
+    });
+  };
+
   return (
     <div className="calc">
       <p style={{ minHeight: 18 }}>{numbers.length && numbers}</p>
       <div className="calc-numbers">
-        <button onClick={() => setNumbers([...numbers, 1])}>1</button>
-        <button onClick={() => setNumbers([...numbers, 2])}>2</button>
-        <button onClick={() => setNumbers([...numbers, 3])}>3</button>
-        <button onClick={() => setNumbers([...numbers, 4])}>4</button>
-        <button onClick={() => setNumbers([...numbers, 5])}>5</button>
-        <button onClick={() => setNumbers([...numbers, 6])}>6</button>
-        <button onClick={() => setNumbers([...numbers, 7])}>7</button>
-        <button onClick={() => setNumbers([...numbers, 8])}>8</button>
-        <button onClick={() => setNumbers([...numbers, 9])}>9</button>
-      </div>
-      <div className="computation">
+        <button onClick={() => handleNumber(1)}>1</button>
+        <button onClick={() => handleNumber(2)}>2</button>
+        <button onClick={() => handleNumber(3)}>3</button>
+        <button onClick={() => handleNumber(4)}>4</button>
+        <button onClick={() => handleNumber(5)}>5</button>
+        <button onClick={() => handleNumber(6)}>6</button>
+        <button onClick={() => handleNumber(7)}>7</button>
+        <button onClick={() => handleNumber(8)}>8</button>
+        <button onClick={() => handleNumber(9)}>9</button>
         <button onClick={handleAdd}>+</button>
-        <button onClick={() => setNumbers([])}>clear</button>
+        <button onClick={() => handleNumber(0)}>0</button>
         <button onClick={handleSubtract}>-</button>
       </div>
-      <button onClick={handleSolve}>do math</button>
+      <div className="computation">
+        <button onClick={() => setNumbers([])}>clear</button>
+        <button onClick={handleSolve}>do math</button>
+      </div>
     </div>
   );
 };
@@ -104,7 +119,9 @@ function App() {
     <div className="App">
       <h1>Google Analytics Test</h1>
       {!update && <button onClick={start}>click me</button>}
-      {update && <UpdateComponent setSolution={setSolution} />}
+      {update && (
+        <UpdateComponent setSolution={setSolution} solution={solution} />
+      )}
       {solution !== 0 && <Clear solution={solution} clearItUp={clearItUp} />}
     </div>
   );
