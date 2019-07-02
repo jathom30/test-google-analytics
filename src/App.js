@@ -6,7 +6,7 @@ ReactGA.initialize("UA-120851599-2");
 
 const UpdateComponent = ({ addItUp }) => {
   return (
-    <div>
+    <div style={{ border: "1px solid gray", padding: "1rem", margin: "1rem" }}>
       <button onClick={() => addItUp([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])}>
         do math
       </button>
@@ -62,7 +62,7 @@ function App() {
   return (
     <div className="App">
       <h1>Google Analytics Test</h1>
-      <button onClick={start}>click me</button>
+      {!update && <button onClick={start}>click me</button>}
       {update && <UpdateComponent addItUp={addItUp} />}
       {math !== 0 && <Clear math={math} clearItUp={clearItUp} />}
     </div>
