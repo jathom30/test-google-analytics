@@ -3,6 +3,7 @@ import ReactGA from "react-ga";
 import "./App.scss";
 
 ReactGA.initialize("UA-120851599-2");
+ReactGA.pageview(window.location.pathname + window.location.seach);
 
 const UpdateComponent = ({ addItUp }) => (
   <div>
