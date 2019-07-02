@@ -5,20 +5,26 @@ import "./App.scss";
 ReactGA.initialize("UA-120851599-2");
 ReactGA.pageview(window.location.pathname + window.location.seach);
 
-const UpdateComponent = ({ addItUp }) => (
-  <div>
-    <button onClick={() => addItUp([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])}>
-      do math
-    </button>
-  </div>
-);
+const UpdateComponent = ({ addItUp }) => {
+  ReactGA.modalview("second");
+  return (
+    <div>
+      <button onClick={() => addItUp([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])}>
+        do math
+      </button>
+    </div>
+  );
+};
 
-const Clear = ({ math, clearItUp }) => (
-  <div>
-    <p>{math}</p>
-    <button onClick={clearItUp}>clear</button>
-  </div>
-);
+const Clear = ({ math, clearItUp }) => {
+  ReactGA.modalview("show-math");
+  return (
+    <div>
+      <p>{math}</p>
+      <button onClick={clearItUp}>clear</button>
+    </div>
+  );
+};
 
 function App() {
   const [update, setUpdate] = useState(false);
@@ -31,7 +37,6 @@ function App() {
       action: "start",
       label: "true"
     });
-    ReactGA.modalview("/second");
   };
 
   const addItUp = arr => {
@@ -42,7 +47,6 @@ function App() {
       action: "math",
       label: sum
     });
-    ReactGA.modalview("/show-math");
   };
 
   const clearItUp = () => {
@@ -53,9 +57,9 @@ function App() {
       action: "clear",
       label: "false"
     });
-    ReactGA.modalview("/start");
   };
 
+  ReactGA.modalview("start");
   return (
     <div className="App">
       <h1>Google Analytics Test</h1>
