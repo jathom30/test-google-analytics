@@ -27,7 +27,8 @@ function App() {
     setUpdate(true);
     ReactGA.event({
       category: "button press",
-      action: "start"
+      action: "start",
+      label: "true"
     });
   };
 
@@ -37,7 +38,7 @@ function App() {
     ReactGA.event({
       category: "button press",
       action: "math",
-      sum: sum
+      label: sum
     });
   };
 
@@ -47,7 +48,7 @@ function App() {
     ReactGA.event({
       category: "button press",
       action: "clear",
-      label: "reset"
+      label: "false"
     });
   };
 
