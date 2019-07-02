@@ -31,6 +31,26 @@ const UpdateComponent = ({ setSolution }) => {
       label: "math"
     });
   };
+  const handleMultiply = () => {
+    setFirstNumber(parseInt(numbers.join("")));
+    setNumbers([]);
+    setOperator("multiply");
+    ReactGA.event({
+      category: "button press",
+      action: "multiplication",
+      label: "math"
+    });
+  };
+  const handleDivide = () => {
+    setFirstNumber(parseInt(numbers.join("")));
+    setNumbers([]);
+    setOperator("divide");
+    ReactGA.event({
+      category: "button press",
+      action: "division",
+      label: "math"
+    });
+  };
   const handleSolve = () => {
     const secondNumber = parseInt(numbers.join(""));
     if (operator === "add") {
@@ -38,6 +58,12 @@ const UpdateComponent = ({ setSolution }) => {
     }
     if (operator === "subtract") {
       setSolution(firstNumber - secondNumber);
+    }
+    if (operator === "multiply") {
+      setSolution(firstNumber * secondNumber);
+    }
+    if (operator === "divide") {
+      setSolution(firstNumber / secondNumber);
     }
     ReactGA.event({
       category: "button press",
@@ -76,9 +102,11 @@ const UpdateComponent = ({ setSolution }) => {
         <button onClick={handleAdd}>+</button>
         <button onClick={() => handleNumber(0)}>0</button>
         <button onClick={handleSubtract}>-</button>
+        <button onClick={handleMultiply}>*</button>
+        <button onClick={handleClear}>clear</button>
+        <button onClick={handleDivide}>/</button>
       </div>
       <div className="computation">
-        <button onClick={handleClear}>clear</button>
         <button onClick={handleSolve}>do math</button>
       </div>
     </div>
