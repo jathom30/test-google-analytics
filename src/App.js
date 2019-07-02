@@ -58,7 +58,7 @@ function App() {
     });
   };
 
-  ReactGA.pageview(window.location.pathname + window.location.seach);
+  ReactGA.pageview("home-page");
   return (
     <div className="App">
       <h1>Google Analytics Test</h1>
