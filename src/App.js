@@ -31,6 +31,7 @@ function App() {
       action: "start",
       label: "true"
     });
+    ReactGA.modalview("/second");
   };
 
   const addItUp = arr => {
@@ -41,6 +42,7 @@ function App() {
       action: "math",
       label: sum
     });
+    ReactGA.modalview("/show-math");
   };
 
   const clearItUp = () => {
@@ -51,6 +53,7 @@ function App() {
       action: "clear",
       label: "false"
     });
+    ReactGA.modalview("/start");
   };
 
   return (
