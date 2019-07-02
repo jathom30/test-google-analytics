@@ -55,6 +55,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Google Analytics Test</h1>
       <button onClick={start}>click me</button>
       {update && <UpdateComponent addItUp={addItUp} />}
       {math !== 0 && <Clear math={math} clearItUp={clearItUp} />}
