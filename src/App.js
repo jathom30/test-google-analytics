@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { initializeReactGA } from "./Auth";
 import ReactGA from "react-ga";
 import "./App.scss";
+
+ReactGA.initialize("UA-120851599-2");
 
 const UpdateComponent = ({ addItUp }) => (
   <div>
@@ -21,10 +23,6 @@ const Clear = ({ math, clearItUp }) => (
 function App() {
   const [update, setUpdate] = useState(false);
   const [math, setMath] = useState(0);
-
-  useEffect(() => {
-    initializeReactGA();
-  }, []);
 
   const start = () => {
     setUpdate(true);
