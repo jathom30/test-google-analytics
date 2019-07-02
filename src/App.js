@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { initializeReactGA } from "./Auth";
+import ReactGA from "react-ga";
 import "./App.scss";
 
 const UpdateComponent = ({ addItUp }) => (
@@ -25,18 +26,37 @@ function App() {
     initializeReactGA();
   }, []);
 
+  const start = () => {
+    setUpdate(true);
+    ReactGA.event({
+      category: "button press",
+      action: "start"
+    });
+  };
+
   const addItUp = arr => {
-    setMath(arr.reduce((acc, val) => acc + val));
+    const sum = arr.reduce((acc, val) => acc + val);
+    setMath(sum);
+    ReactGA.event({
+      category: "button press",
+      action: "math",
+      sum: sum
+    });
   };
 
   const clearItUp = () => {
     setMath(0);
     setUpdate(false);
+    ReactGA.event({
+      category: "button press",
+      action: "clear",
+      label: "reset"
+    });
   };
 
   return (
     <div className="App">
-      <button onClick={() => setUpdate(!update)}>click me</button>
+      <button onClick={start}>click me</button>
       {update && <UpdateComponent addItUp={addItUp} />}
       {math !== 0 && <Clear math={math} clearItUp={clearItUp} />}
     </div>
