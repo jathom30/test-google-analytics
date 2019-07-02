@@ -3,7 +3,7 @@ import ReactGA from "react-ga";
 import "./App.scss";
 
 ReactGA.initialize("UA-120851599-2", {
-  debug: true
+  debug: false
 });
 
 const UpdateComponent = ({ setSolution }) => {
