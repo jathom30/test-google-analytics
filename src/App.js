@@ -44,7 +44,8 @@ function App() {
     ReactGA.event({
       category: "button press",
       action: "math",
-      label: sum
+      label: sum.toString(),
+      value: sum
     });
   };
 
