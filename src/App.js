@@ -6,21 +6,71 @@ ReactGA.initialize("UA-120851599-2", {
   debug: true
 });
 
-const UpdateComponent = ({ addItUp }) => {
+const UpdateComponent = ({ setSolution }) => {
+  const [numbers, setNumbers] = useState([]);
+  const [firstNumber, setFirstNumber] = useState(0);
+  const [operator, setOperator] = useState("");
+
+  const handleAdd = () => {
+    setFirstNumber(parseInt(numbers.join("")));
+    setNumbers([]);
+    setOperator("add");
+    ReactGA.event({
+      category: "button press",
+      action: "addition",
+      label: "math"
+    });
+  };
+  const handleSubtract = () => {
+    setFirstNumber(parseInt(numbers.join("")));
+    setNumbers([]);
+    setOperator("subtract");
+    ReactGA.event({
+      category: "button press",
+      action: "subtraction",
+      label: "math"
+    });
+  };
+  const handleSolve = () => {
+    const secondNumber = parseInt(numbers.join(""));
+    if (operator === "add") setSolution(firstNumber + secondNumber);
+    if (operator === "subtract") setSolution(firstNumber - secondNumber);
+    ReactGA.event({
+      category: "button press",
+      action: "solution",
+      label: "math"
+    });
+  };
+
   return (
-    <div style={{ border: "1px solid gray", padding: "1rem", margin: "1rem" }}>
-      <button onClick={() => addItUp([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])}>
-        do math
-      </button>
+    <div className="calc">
+      <p style={{ minHeight: 18 }}>{numbers.length && numbers}</p>
+      <div className="calc-numbers">
+        <button onClick={() => setNumbers([...numbers, 1])}>1</button>
+        <button onClick={() => setNumbers([...numbers, 2])}>2</button>
+        <button onClick={() => setNumbers([...numbers, 3])}>3</button>
+        <button onClick={() => setNumbers([...numbers, 4])}>4</button>
+        <button onClick={() => setNumbers([...numbers, 5])}>5</button>
+        <button onClick={() => setNumbers([...numbers, 6])}>6</button>
+        <button onClick={() => setNumbers([...numbers, 7])}>7</button>
+        <button onClick={() => setNumbers([...numbers, 8])}>8</button>
+        <button onClick={() => setNumbers([...numbers, 9])}>9</button>
+      </div>
+      <div className="computation">
+        <button onClick={handleAdd}>+</button>
+        <button onClick={() => setNumbers([])}>clear</button>
+        <button onClick={handleSubtract}>-</button>
+      </div>
+      <button onClick={handleSolve}>do math</button>
     </div>
   );
 };
 
-const Clear = ({ math, clearItUp }) => {
+const Clear = ({ solution, clearItUp }) => {
   ReactGA.modalview("show-math");
   return (
     <div>
-      <p>{math}</p>
+      <p>{solution}</p>
       <button onClick={clearItUp}>clear</button>
     </div>
   );
@@ -28,7 +78,7 @@ const Clear = ({ math, clearItUp }) => {
 
 function App() {
   const [update, setUpdate] = useState(false);
-  const [math, setMath] = useState(0);
+  const [solution, setSolution] = useState(0);
 
   const start = () => {
     setUpdate(true);
@@ -39,19 +89,8 @@ function App() {
     });
   };
 
-  const addItUp = arr => {
-    const sum = arr.reduce((acc, val) => acc + val);
-    setMath(sum);
-    ReactGA.event({
-      category: "button press",
-      action: "math",
-      label: sum.toString(),
-      value: sum
-    });
-  };
-
   const clearItUp = () => {
-    setMath(0);
+    setSolution(0);
     setUpdate(false);
     ReactGA.event({
       category: "button press",
@@ -65,8 +104,8 @@ function App() {
     <div className="App">
       <h1>Google Analytics Test</h1>
       {!update && <button onClick={start}>click me</button>}
-      {update && <UpdateComponent addItUp={addItUp} />}
-      {math !== 0 && <Clear math={math} clearItUp={clearItUp} />}
+      {update && <UpdateComponent setSolution={setSolution} />}
+      {solution !== 0 && <Clear solution={solution} clearItUp={clearItUp} />}
     </div>
   );
 }

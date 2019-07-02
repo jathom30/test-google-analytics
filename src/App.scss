@@ -8,6 +8,19 @@
   }
 }
 
+.calc {
+  border: 1px solid lightgray;
+  padding: 1rem;
+  margin: 1rem;
+}
+.calc-numbers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.computation {
+  margin-bottom: 2rem;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
