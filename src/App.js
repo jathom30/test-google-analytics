@@ -5,7 +5,6 @@ import "./App.scss";
 ReactGA.initialize("UA-120851599-2");
 
 const UpdateComponent = ({ addItUp }) => {
-  ReactGA.modalview("second");
   return (
     <div>
       <button onClick={() => addItUp([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])}>
