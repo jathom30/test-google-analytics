@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import ReactGA from "react-ga";
 import "./App.scss";
 
-ReactGA.initialize("UA-120851599-2");
+ReactGA.initialize("UA-120851599-2", {
+  debug: true
+});
 
 const UpdateComponent = ({ addItUp }) => {
   return (
